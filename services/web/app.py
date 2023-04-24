@@ -1,24 +1,27 @@
 #!/usr/bin/env python3
 
 from flask import Flask,request,render_template,Response,redirect
-from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
-from flask_migrate import Migrate
-from sqlalchemy_utils.functions import database_exists
-from sqlalchemy import func,and_
 from yaml import load as yload,FullLoader
 from os.path import exists,join
-from model import DatasetType,Dataset,Tag,TagType,Status,Text,TaggerType,Tagger,db,DatasetTypeView,DatasetView,TextView,TagTypeView,TagView,TaggerView,TaggerTypeView
-from utils import tag_content
-from collections import Counter
 from random import random
 from json import dumps
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
+from werkzeug.wrappers import Response
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__,
+                static_folder='static')
 
-    #app.config.from_yaml(app.root_path)
+    # Uncomment and edit the following for app to be mounted under a prefix
+    # See `templates/base.html` for usage of `for_url(...)`
+    #app.wsgi_app = DispatcherMiddleware(
+    #    Response('Not Found', status=404),
+    #    {
+    #        '/prefix': app.wsgi_app
+    #    }
+    #)
+
     config_path = join(app.root_path, 'config.yml')
     if exists(config_path):
         app.config.update(
