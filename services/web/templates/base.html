@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+
+        <title>{{ request.headers.get('Host') | default(None) }}</title>
+
+        <script src="/static/js/jquery-3.6.4.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/js/Semantic-UI-2.9.2/semantic.min.css"></script>
+        <script src="/static/js/Semantic-UI-2.9.2/semantic.min.js"></script>
+
+        # block head
+        # endblock
+
+        <style type="text/css">
+            body {
+                background-color: #FFFFFF;
+            }
+
+            .ui.menu .item img.logo {
+                margin-right: 1.5em;
+            }
+
+            .main.article {
+                padding-top: 5em;
+                margin-left: 10%;
+                margin-right: 10%;
+                padding-bottom: 2em;
+            }
+
+            .wireframe {
+                margin-top: 2em;
+            }
+
+            .ui.footer.segment {
+                margin: 5em 0em 0em;
+                padding: 5em 0em;
+            }
+
+            .content {
+                font-size: 3em;
+                margin: 1em;
+            }
+
+            # block css
+            # endblock
+
+        </style>
+    </head>
+    <body>
+        <div class="ui fixed inverted menu">
+            <div class="ui container">
+                <div class="header item">
+                    <img class="logo" src="/tag/static/favicon.svg"> {{ request.headers.get('Host') | default(None) }}
+                </div>
+                <a href="/tag/" class="item">Home</a>
+                <a href="/tag/datasets/" class="item">Datasets</a>
+                <a href="/tag/taggers/" class="item">Taggers</a>
+            </div>
+        </div>
+
+        <div class="ui center aligned main article">
+            # block content
+            # endblock
+        </div>
+    </body>
+
+    # block afterbody
+    # endblock
+</html>
